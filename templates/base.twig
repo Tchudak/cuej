@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/app.css">
+	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+	<title>Dieu, y es-tu ?</title>
+	<link rel="shortcut icon" href="./public/svg/logo_violet.svg" type="image/x-icon">
+	<script src="./public/js/main.js" defer></script>
+	<script src="./public/js/mobile.js" defer></script>
+</head>
+{# <a href="index.php?page=page">Pages</a>
+<a href="index.php?page=article">Articles</a>
+<a href="index.php?page=section">Sections</a>
+<a href="index.php?page=element">Elements</a> #}
+
+<body class="wrapper">
+	<header class="header"></header>
+	<nav class="sidebar"></nav>
+	{% block main %}{% endblock %}
+	<footer></footer>
+	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+	<script>
+		AOS.init();
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+{% extends 'base.twig' %}
+
+{% block main %}
+
+<main class="color-credit">
+    <div class="progress">
+        <div class="progress__bar" id="progressBar"></div>
+    </div>
+    <header class=" page__header" style=" background-image : url('./public/img/credit_img.png')">
+        <div class="page__header__content">
+            <div class="page__header__content__colorRectangle"></div>
+            <h1>Crédits</h1>
+            <hr>
+            <p class="page__header__content__credit">Christophe DELEU</p>
+        </div>
+    </header>
+
+    <div class="article__container__item credit-div">
+
+        <h2 class="article__container__item--h2">Directeur de publication :</h2>
+        <p>Christophe Deleu</p>
+
+        <h2 class="article__container__item--h2">Encadrement :</h2>
+        <p><b>Cuej :</b> Antoine Bonin, Christophe Deleu, Charlotte Dorn, Valentina Grossi, Antoine Husser, Joseph
+            Pasquier et Cédric Pellen</p>
+        <p><b>IUT de Haguenau :</b> David Cazier</p>
+
+        <h2 class="article__container__item--h2">Étudiants en BUT Métiers du multimédia et de l'internet :</h2>
+        <p><b>Graphistes :</b> Lilia Debieve, Alixan Balu</p>
+        <p><b>Développeurs front end :</b> Lilia Debieve, Alixan Balu, Annelise Celma, Anthony Huot, Maëlle Falch</p>
+        <p><b>Développeurs back end : </b>Alixan Balu, Anthony Huot, Maëlle Falch</p>
+
+        <h2 class="article__container__item--h2">Étudiants du Centre universitaire de l'enseignement du journalisme :
+        </h2>
+        <p><b>Rédactrice en chef :</b> Marine Corbel</p>
+        <p><b>Responsable d'édition :</b> Tara Abeelack</p>
+        <p><b>Responsable iconographique :</b> Théo Renault</p>
+        <p><b>Responsable graphisme :</b> Louise Forbin</p>
+        <p><b>Rédacteurs et rédactrices :</b> Tara Abeelack, Amjad Allouchi, Alexia Avril, Milan Busignies, Baptiste
+            Candas, Quentin Celet, Marine Corbel, Cyprien Durand-Morel, Louise Forbin, Louison Fourment, Christina
+            Genet, Anthony Jilli, Vincent Le Goff, Tifenn Leriche, Théo Renault, Luca Salvatore, Léna Sévaux, Amine
+            Snoussi, Joffray Vasseur</p>
+        <br>
+        <br>
+        <h2 class="article__container__item--h2">CUEJ (Centre universitaire de l'enseignement du journalisme) –
+            Université de Strasbourg</h2>
+        <p>11, rue du Maréchal Juin CS 10068 67046 STRASBOURG Tél. : 03.68.85.83.00</p>
+        <a href="https://cuej.unistra.fr/" target="_blank">Plus d'infos sur le CUEJ</a>
+    </div>
+    {% endblock main %}

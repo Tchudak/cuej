@@ -1,0 +1,166 @@
+{% extends 'base.twig' %}
+
+
+{# <div class="main-content">
+	<div class="main-content__floating-square" id="floatingSquare">
+	</div>
+</div> #}
+{# <a href="index.php?page=page&action=read">Toutes les pages</a>
+<a href="index.php?page=page&action=new">Créer une page</a>
+{# {{dump(pages)}} #}
+
+
+{% block main %}
+<main class="full-width"> <!-- SECTION 1 - CHURCH -->
+	<section class="sectionChurch" id="sectionChurch">
+		{# <div class="sectionChurch__divTitle"> #}
+			<h1 class="sectionChurch__title">Dieu, y es-tu ?</h1>
+			{#
+		</div> #}
+		<div class="sectionChurch__floatingSquare" id="floatingSquare">
+			<a href="#sectionChimere">
+				<div class="sectionChurch__floatingSquare__arrowAnim">
+					<div class="sectionChurch__floatingSquare__arrowAnim__arrowSliding">
+						<div class="sectionChurch__floatingSquare__arrowAnim__arrow"></div>
+					</div>
+					<div
+						class="sectionChurch__floatingSquare__arrowAnim__arrowSliding sectionChurch__floatingSquare__arrowAnim__delay1">
+						<div class="sectionChurch__floatingSquare__arrowAnim__arrow"></div>
+					</div>
+					<div
+						class="sectionChurch__floatingSquare__arrowAnim__arrowSliding sectionChurch__floatingSquare__arrowAnim__delay2">
+						<div class="sectionChurch__floatingSquare__arrowAnim__arrow"></div>
+					</div>
+				</div>
+			</a>
+		</div>
+		<div class="sectionChurch__floatingSquare--border" id="floatingSquareBorder"></div>
+
+		<p class="verticalText">
+			<span class="verticalText__number">01-</span>
+			Réalisé par le CUEJ Strasbourg
+		</p>
+
+	</section>
+	<!-- SECTION 2 - EDITO -->
+	<section class="sectionEdito" id="sectionEdito">
+		<p class="verticalText verticalText--white">
+			<span class="verticalText__number">02-</span>
+			Réalisé par le CUEJ Strasbourg
+		</p>
+		<div data-aos="fade-up" data-aos-anchor-placement="bottom" class="sectionEdito__div ">
+			<h2 class="sectionEdito__div__title">Édito :</h2>
+			<p class="sectionEdito__div__text">La France, pays d’athées ? En 2022, 42% des Français se déclarent « sans
+				religion », un chiffre qui atteint 60% chez les moins de 25 ans. Mais les dieux n’ont pas dit leur
+				dernier mot. Alors que le catholicisme poursuit sa chute, des mosquées se construisent, des églises
+				évangéliques font le plein et des temples bouddhistes attirent des personnes en quête
+				spirituelle.
+
+				Des croyants portent leur message en dehors des lieux de culte. La Manif pour tous s’active sur les
+				questions de bioéthique, les missionnaires de TikTok tentent de convaincre la jeunesse.
+
+				Face à des institutions rétrogrades, certains se battent pour que la porte de l’église ou de la
+				synagogue ne soit plus claquée au nez des femmes et de la communauté LGBTQIA+.
+
+				Au nom de Dieu, on croit et on questionne, parfois on pratique. Et vous, prenez-vous rendez-vous avec
+				Dieu ? Tous les soirs ? Une fois par mois ? Vous le boudez peut-être ? Ou vous l’avez simplement
+				renommé
+				« Univers », « Amour », « Énergie » ?<br><br>
+
+				Bienvenue dans le monde des croyants, des pratiquants, des mystiques, des anticléricaux, des athées et
+				des autres.<br><br>
+
+				Bienvenue dans le monde des humains.</p>
+
+			<p style="text-align: right; margin-bottom: 0.1rem;">Marine CORBEL</p>
+		</div>
+	</section>
+
+
+	<!-- SECTION 3 - CHIMERE -->
+	<section class="sectionChimere" id="sectionChimere">
+		<p class="verticalText">
+			<span class="verticalText__number">03-</span>
+		</p>
+		<img class="sectionChimere__burger" src="./public/svg/burger_menu_black.svg" alt="=" id="sideBarMenu">
+		<div class="sectionChimere__sidebar" id="sideBar">
+			<img src="./public/svg/close.svg" alt="=" id="closeSideBarMenu">
+			<div class="sectionChimere__sidebar__row-home">
+				<div>
+					<h4>
+						<a href="index.php">ACCUEIL</a>
+					</h4>
+					<h4>
+						<a href="index.php#sectionChimere">SOMMAIRE</a>
+					</h4>
+				</div>
+				<div>
+					<ul>
+						<li><a href="https://cuej.unistra.fr/mentions-legales/">Mentions légales</a></li>
+						<li><a href="index.php?page=credit">Crédits</a></li>
+					</ul>
+				</div>
+			</div>
+			<hr />
+			<div class="sectionChimere__sidebar__row-article">
+				{% for p in pages %}
+				<div class="sectionChimere__sidebar__row-article__item">
+					<h3>
+						<a href="index.php?page=page&action=read&id={{p.id}}"
+							class="sectionChimere__sidebar__row-article__item__lien">{{p.nom}}</a>
+					</h3>
+					<ul class="sectionChimere__sidebar__row-article__item__list">
+						{% for a in articles %}
+						{% if a.id_page == p.id %}
+						<li>
+							<a href="index.php?page=page&action=read&id={{p.id}}#{{a.id}}">
+								{{a.nom}}
+							</a>
+						</li>
+						{% endif %}
+						{% endfor %}
+					</ul>
+				</div>
+				{% endfor %}
+			</div>
+			<div class="sectionChimere__sidebar__absolute-gradient"></div>
+		</div>
+
+
+		<!-- CHIMERE -->
+		<div class="sectionChimere__container">
+			<div class="sectionChimere__container__divRelative">
+				{% for p in pages %}
+				<a href="index.php?page=page&action=read&id={{p.id}}">
+					<img src="{{p.chimereimg}}" alt="{{p.nom}}" id="{{p.idchim}}">
+				</a>
+				{% endfor %}
+			</div>
+			{% for p in pages %}
+			<div class="sectionChimere__container__resume">
+				<h2>{{p.nom}}</h2>
+				<p>{{p.resume}}</p>
+				<a href="index.php?page=page&action=read&id={{p.id}}" class="discover">
+					Découvrir
+				</a>
+			</div>
+			{% endfor %}
+		</div>
+		<footer>
+			<ul class="cc-wrapper">
+				<li>
+					<a href="https://cuej.unistra.fr/mentions-legales/" target="_blank" rel="noopener noreferrer">
+						© Mention Légales
+					</a>
+				</li>
+				<li>
+					<a href="index.php?page=credit" target="_blank" rel="noopener noreferrer">
+						Crédits
+					</a>
+				</li>
+			</ul>
+		</footer>
+
+	</section>
+</main>
+{% endblock %}

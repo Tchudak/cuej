@@ -1,0 +1,231 @@
+{% extends 'base.twig' %}
+
+{% block main %}
+<header>
+	<img class="sectionChimere__burger" src="./public/svg/burger_menu_black.svg" alt="=" id="sideBarMenu"
+		style="position : fixed;">
+	<div class="sectionChimere__sidebar" style="position: fixed;" id="sideBar">
+		<img src="./public/svg/close.svg" alt="=" id="closeSideBarMenu">
+		<div class="sectionChimere__sidebar__row-home">
+			<div>
+				<h4>
+					<a href="index.php">ACCUEIL</a>
+				</h4>
+				<h4>
+					<a href="index.php#sectionChimere">SOMMAIRE</a>
+				</h4>
+			</div>
+			<div>
+				<ul>
+					<li><a href="https://cuej.unistra.fr/mentions-legales/">Mentions légales</a></li>
+					<li><a href="index.php?page=credit">Crédits</a></li>
+				</ul>
+			</div>
+		</div>
+		<hr />
+		<div class="sectionChimere__sidebar__row-article">
+			{% for p in pages %}
+			<div class="sectionChimere__sidebar__row-article__item">
+				<h3>
+					<a href="index.php?page=page&action=read&id={{p.id}}"
+						class="sectionChimere__sidebar__row-article__item__lien">{{p.nom}}</a>
+				</h3>
+				<ul class="sectionChimere__sidebar__row-article__item__list">
+					{% for a in articlesall %}
+					{% if a.id_page == p.id %}
+					<li>
+						<a href="index.php?page=page&action=read&id={{p.id}}#{{a.id}}">
+							{{a.nom}}
+						</a>
+					</li>
+					{% endif %}
+					{% endfor %}
+				</ul>
+			</div>
+			{% endfor %}
+		</div>
+		<div class="sectionChimere__sidebar__absolute-gradient"></div>
+	</div>
+</header>
+<main class="color-{{page.id_couleur}}">
+	<div class="progress">
+		<div class="progress__bar" id="progressBar"></div>
+	</div>
+	<header class=" page__header"
+		style=" background : linear-gradient(90deg, rgba(0, 0, 0, 0.58) 40%, rgba(255, 255, 255, 0) 100%), url('./uploads/{{page.media_datatype}}/{{page.media_nom}}'); background-repeat : no-repeat; background-size : cover;"
+		id="{{page.id}}">
+		<div class="page__header__content">
+			<div class="page__header__content__colorRectangle"></div>
+			<h1>{{page.nom}}</h1>
+			<p class="page__header__content__resume">{{page.resume}}</p>
+			<hr>
+			<p class="page__header__content__credit">{{page.media_credit}}</p>
+		</div>
+	</header>
+	{% set compteurDiapo = 0 %}
+	{% for a in articles %}
+	<article id="{{a.id}}">
+		<header class="article__header"
+			style="background-size: cover !important; background : linear-gradient(90deg, rgba(0, 0, 0, 0.58) 40%, rgba(255, 255, 255, 0) 100%), url('./uploads/{{a.media_datatype}}/{{a.media_nom}}'); background-repeat : no-repeat; background-size : cover;">
+			<div class="article__header__content">
+				<div class="article__header__content--colorRectangle">
+					<div class="article__header__naviguate">
+						<a href="" class="article__header__naviguate--previous" id="previousArticle">
+							<img src="./public/svg/chevron_up.svg">
+						</a>
+						<a href="" class="article__header__naviguate--previous" id="nextArticle">
+							<img src="./public/svg/chevron_down.svg">
+						</a>
+					</div>
+				</div>
+				<h1>{{a.nom}}</h1>
+				<p>{{a.chapo}}</p>
+				<hr>
+				<p class="article__header__content--auteur">{{a.auteur}}</p>
+				<p class="article__header__content--credit">{{a.media_credit}}</p>
+			</div>
+		</header>
+
+
+		<div class="article__container">
+			{% for e in a.elements %}
+			{% if e.balise == 'img-background' or e.classe == 'full-width'%}
+			<div class="article__container__item--full-width">
+				{% else %}
+				<div class="article__container__item">
+					{% endif %}
+
+					{# Item generator #}
+					{% if e.balise == 'h1' %}
+					<h1 class="article__container__item--h1 {{e.nom_classe}}">{{e.contenu}}</h1>
+					{% elseif e.balise == 'h2' %}
+					<h2 class="article__container__item--h2 {{e.nom_classe}}">{{e.contenu}}</h2>
+					{% elseif e.balise == 'h3' %}
+					<h3 class="article__container__item--h3 {{e.nom_classe}}">{{e.contenu}}</h3>
+					{% elseif e.balise == 'h4' %}
+					<h4 class="article__container__item--h4 {{e.nom_classe}}">{{e.contenu}}</h4>
+					{% elseif e.balise == 'p' %}
+					<p class="article__container__item--p {{e.nom_classe}}">{{e.contenu|raw|nl2br}}</p>
+					{% elseif e.balise == 'a' %}
+					<a href="{{e.href}}" class="article__container__item--a {{e.nom_classe}}">{{e.contenu}}</a>
+					{% elseif e.balise == 'img' and e.contenu != null %}
+					<figure class="article__container__item--figure {{e.nom_classe}}">
+						<img class="article__container__item--figure__img"
+							src="./uploads/{{e.media_datatype}}/{{e.media_nom}}" alt="{{e.media_nom}}">
+						<figcaption class="article__container__item--figure__caption">
+							{{e.contenu|raw|nl2br}}<span>{{e.media_credit}}</span>
+						</figcaption>
+					</figure>
+					{% elseif e.balise == 'img' %}
+					<img class="article__container__item--img {{e.nom_classe}}"
+						src="./uploads/{{e.media_datatype}}/{{e.media_nom}}" alt="{{e.media_nom}}">
+
+					{% elseif e.balise == 'img-background' %}
+					<div class="article__header img-background"
+						style="background-size: cover !important; background : linear-gradient(90deg, rgba(0, 0, 0, 0.58) 40%, rgba(255, 255, 255, 0) 100%), url('./uploads/{{e.media_datatype}}/{{e.media_nom}}');">
+						<div class="article__header__content">
+							<h1>{{e.sous_contenu|raw|nl2br}}</h1>
+							<p>{{e.contenu|raw|nl2br}}</p>
+							<p class="article__header__content--credit" style="right:1% !important;">{{e.media_credit}}
+							</p>
+						</div>
+					</div>
+					{% elseif e.balise == 'blockquote' %}
+					<blockquote cite="{{e.href}}" class="article__container__item--blockquote {{e.nom_classe}}">
+						{{e.contenu|raw|nl2br}}</blockquote>
+					{% elseif e.balise == 'bloc' %}
+					<div class="article__container__item--bloc {{e.nom_classe}} colorbloc-{{page.id_couleur}}">
+						<h3>{{e.sous_contenu|raw|nl2br}}</h3>
+						<p>{{e.contenu|raw|nl2br}}</p>
+					</div>
+
+					{% elseif e.balise == 'img-diapo' %}
+					{% set compteurDiapo = compteurDiapo + 1 %}
+					<img class="img-diapo-{{a.id}}" src="./uploads/{{e.media_datatype}}/{{e.media_nom}}"
+						alt="{{e.media_alt}}">
+
+					{% elseif e.balise == 'img-portrait' %}
+					<div class="card-container">
+						<div class="card">
+							<div class="front face">
+								<figure class="portrait-figure">
+									<img class="portrait-img {{e.nom_classe}}"
+										src="./uploads/{{e.media_datatype}}/{{e.media_nom}}" alt="{{e.media_alt}}">
+									<figcaption class="portrait-figure__text">{{e.sous_contenu|raw|nl2br}}</figcaption>
+								</figure>
+							</div>
+							<div class="back face center">
+								<div>
+									<p class="citation">{{e.href|raw|nl2br}}</p>
+									<p class="credit">{{e.media_credit}}</p>
+								</div>
+							</div>
+						</div>
+						<p>{{e.contenu|raw|nl2br}}</p>
+						{% elseif e.balise == 'video' %}
+						<video class="article__container__item--video {{e.nom_classe}}"
+							src="./uploads/{{e.media_datatype}}/{{e.media_nom}}" controls>>
+							{% elseif e.balise == 'audio' %}
+							<audio controls src="./uploads/{{e.media_datatype}}/{{e.media_nom}}" id="{{e.media_nom}}"></audio>
+							{% endif %}
+					</div>
+				</div>
+				{% if e.nom_classe == 'right-bloc' or e.nom_classe == 'right-bloc-highlight' %}
+			</div>
+			{% endif %}
+			{% endfor %}
+			<div class="slider-wrapper" id="wrapper-{{a.id}}"></div>
+		</div>
+	</article>
+	{% endfor %}
+	<div class="page__voir">
+		<h2 class="page__voir__h2">Vous pourriez aimer aussi :</h2>
+		<ul>
+			<li class="colorli-{{page_oui.id_couleur}}">
+				<a href="index.php?page=page&action=read&id={{page.id_famille_oui}}"
+					class="page__voir__a">{{page_oui.nom}}</a>
+			</li>
+			<li class="colorli-{{page_non.id_couleur}}">
+				<a href="index.php?page=page&action=read&id={{page.id_famille_non}}"
+					class="page__voir__a">{{page_non.nom}}</a>
+			</li>
+		</ul>
+	</div>
+
+</main>
+{% if compteurDiapo > 0 %}
+{% for a in articles %}
+<script>
+
+	var sliderWrap = 0;
+	var slider = 0;
+	var img = 0;
+	var btn = 0;
+	var sliderNav = 0;
+
+	sliderWrap = document.getElementById('wrapper-{{ a.id }}');
+
+	slider = document.createElement('div');
+	slider.classList.add("slider");
+	sliderWrap.appendChild(slider);
+
+	img = document.querySelectorAll('.img-diapo-{{ a.id }}');
+
+	sliderNav = document.createElement('div');
+	sliderNav.classList.add('slider-nav');
+
+	img.forEach(function (elem, index) {
+		elem.id = index + 1 + elem.textContent;
+		slider.appendChild(elem);
+		btn = document.createElement('a');
+		sliderNav.appendChild(btn);
+		btn.href = "#" + (index + 1);
+		sliderWrap.appendChild(sliderNav);
+
+
+	})
+</script>
+{% endfor %}
+{% endif %}
+
+{% endblock main %}
